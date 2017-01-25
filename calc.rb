@@ -3,9 +3,16 @@ class Calc
   end
 
   def evaluate(s)
-    
+    parts = s.split('=')
+    if (parts.length == 1) then
+      var = nil
+      expr = parts[0]
+    else
+      var = parts[0]
+      expr = parts[1]
+    end
     #puts "expression: #{expression}"
-    evaluate_add_expression(s)
+    evaluate_add_expression(expr)
   end
 
   def evaluate_add_expression(s)
