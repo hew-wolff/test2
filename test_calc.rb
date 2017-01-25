@@ -26,4 +26,18 @@ class TestCalc < Test::Unit::TestCase
     assert_equal 7, @c.evaluate("1+2*3")
     assert_equal 30, @c.evaluate("1+2*3*4+5")
   end
+  
+  def test_div
+    assert_close 1.0/2, @c.evaluate("1/2")
+    assert_close 2.0/3, @c.evaluate("1*2/3")
+    assert_close 10.0/3, @c.evaluate("1/2/3*4*5")
+  end
+
+  def test_call
+
+  end
+
+  def assert_close(expected, actual)
+    assert_in_delta expected, actual
+  end
 end

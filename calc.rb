@@ -21,7 +21,7 @@ class Calc
   end
 
   def evaluate_add_term(expression)
-    ops_re = /[*]/
+    ops_re = /[*\/]/
     terms = expression.split(ops_re)
     #puts "add_terms: #{add_terms}"
     ops = ['*'] + expression.scan(ops_re).to_a
@@ -29,12 +29,12 @@ class Calc
     op_terms = ops.zip(terms)
     op_terms.reduce(1) do |acc, v|
       #puts "acc: #{acc}"
-      #is_negative = v[0] == '-'
+      is_div = v[0] == '/'
       #puts "is_neg: #{is_negative}"
       next_value = evaluate_simple_term(v[1])
       #puts "value: #{next_value}"
       #acc + (is_negative ? -next_value : next_value)
-      acc * next_value
+      acc * (is_div ? 1/next_value : next_value)
     end
   end
 
