@@ -33,8 +33,8 @@ class TestCalc < Test::Unit::TestCase
     assert_close 10.0/3, @c.evaluate("1/2/3*4*5")
   end
 
-  def test_call
-
+  def test_all
+    assert_close 1 + 2/3.0 - 4*5*6/7.0 - 8*9, @c.evaluate("1+2/3-4*5*6/7-8*9")
   end
 
   def assert_close(expected, actual)
