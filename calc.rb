@@ -13,7 +13,8 @@ class Calc
       expr = parts[1]
     end
     value = evaluate_add_expression(expr)
-    var ? @vars[var] = value : value
+    result = var ? (@vars[var] = value) : value
+    result
   end
 
   def evaluate_add_expression(s)
@@ -28,7 +29,6 @@ class Calc
     end
   end
 
-
   def evaluate_mult_expression(s)
     ops_re = /[*\/]/
     terms = s.split(ops_re)
@@ -42,6 +42,7 @@ class Calc
   end
 
   def evaluate_simple_term(t)
-    @vars[t] || t.to_f
+    result = @vars[t] || t.to_f
+    result
   end
 end

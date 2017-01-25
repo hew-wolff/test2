@@ -39,6 +39,7 @@ class TestCalc < Test::Unit::TestCase
 
   def test_var
     assert_equal 5, @c.evaluate("a=1*2+3")
+    assert_equal 5, @c.evaluate("a")
     assert_equal 25, @c.evaluate("b=4*a+5")
     assert_close 1/5.0, @c.evaluate("c=a/b")
   end
