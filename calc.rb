@@ -2,29 +2,35 @@ class Calc
   def initialize
   end
 
-  def evaluate(expression)
+  def evaluate(s)
+    
     #puts "expression: #{expression}"
+    evaluate_add_expression(s)
+  end
+
+  def evaluate_add_expression(s)
     ops_re = /[+-]/
-    add_terms = expression.split(ops_re)
+    add_terms = s.split(ops_re)
     #puts "add_terms: #{add_terms}"
-    add_ops = ['+'] + expression.scan(ops_re).to_a
+    add_ops = ['+'] + s.scan(ops_re).to_a
     #puts "add_ops: #{add_ops}"
     op_terms = add_ops.zip(add_terms)
     op_terms.reduce(0) do |acc, v|
       #puts "acc: #{acc}"
       is_negative = v[0] == '-'
       #puts "is_neg: #{is_negative}"
-      next_value = evaluate_add_term(v[1])
+      next_value = evaluate_mult_expression(v[1])
       #puts "value: #{next_value}"
       acc + (is_negative ? -next_value : next_value)
     end
   end
 
-  def evaluate_add_term(expression)
+
+  def evaluate_mult_expression(s)
     ops_re = /[*\/]/
-    terms = expression.split(ops_re)
+    terms = s.split(ops_re)
     #puts "add_terms: #{add_terms}"
-    ops = ['*'] + expression.scan(ops_re).to_a
+    ops = ['*'] + s.scan(ops_re).to_a
     #puts "add_ops: #{add_ops}"
     op_terms = ops.zip(terms)
     op_terms.reduce(1) do |acc, v|
